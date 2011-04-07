@@ -45,7 +45,15 @@ class StringRunner {
      * @return String The Content of the actual Line
      */
     public function getContent() {
-        return $this->_content[$this->_line];
+        return (string)$this->_content[$this->_line];
+    }
+
+    /**
+     * Overwrite the Content in the actual line with $content
+     * @param String $content The Content
+     */
+    public function setContent($content) {
+        $this->_content[$this->_line] = $content;
     }
 
     /**
@@ -54,6 +62,37 @@ class StringRunner {
      */
     public function getLines() {
         return count($this->_content);
+    }
+
+    /**
+     * Deletes the current Element out of your Content.
+     */
+    public function removeLine() {
+        unset($this->_content[$this->_line]);
+        $this->_line++;
+    }
+
+    /**
+     * Returns the whole Content in a Array Format.
+     * @return array The whole Content. Converted to Array
+     */
+    public function getArray() {
+        return $this->_content;
+    }
+
+    /**
+     * Fixes the ArrayIndex
+     */
+    public function fixIndex() {
+        $this->_content = array_values($this->_content);
+    }
+
+    /**
+     * Returns the String
+     * @return String The whole String
+     */
+    public function getString() {
+        return implode("\n", $this->_content);
     }
 }
 ?>

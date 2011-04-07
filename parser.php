@@ -5,13 +5,15 @@
  */
 
 require_once 'classes/StringRunner.php';
+require_once 'classes/Parser.php';
 
 $oosbl = $_POST['oosbl'];
+$parser = new Parser();
 
-$runner = new StringRunner($oosbl);
+$test = $parser->stripComments($oosbl);
+$test = $parser->stripWhitelines($test);
+$test = $parser->stripWhitespaces($test);
+$test = $parser->convert2Php($test);
 
-for ( $i = 0; $i < $runner->getLines(); $i++ ) {
-    echo $runner->getContent();
-    $runner->nextLine();
-}
-
+$test2 = 'echo $test;';
+eval($test2);

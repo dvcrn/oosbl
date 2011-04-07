@@ -96,6 +96,9 @@ class Parser {
         // Replace all '.' to '->', except they are in brackets
         $string = preg_replace("/(\.)(.*\()/", '->' . "$2", $string);
 
+        // Remove all 'var'
+        $string = preg_replace("/var */", '', $string);
+
         return $string;
     }
 }
