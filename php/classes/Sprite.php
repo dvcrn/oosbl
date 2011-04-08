@@ -122,11 +122,13 @@ class Sprite {
 
     public function resize($ms, $duration, $size)
     {
+        $this->_osb->scale($ms, $ms + $duration, $this->size, $size);
         $this->size = $size;
     }
 
     public function fade($ms, $duration, $trans)
     {
+        $this->_osb->fade($ms, $ms + $duration, $this->trans, $trans);
         $this->trans = $trans;
     }
 
