@@ -47,9 +47,9 @@ class OsbOutput {
     {
         $args = array();
         $args[] = '_M';
+        $args[] = $easing;
         $args[] = $startms;
         $args[] = $endms;
-        $args[] = $easing;
         $args[] = $startx;
         $args[] = $starty;
         $args[] = $endx;
@@ -62,9 +62,9 @@ class OsbOutput {
     {
         $args = array();
         $args[] = '_S';
+        $args[] = $easing;
         $args[] = $startms;
         $args[] = $endms;
-        $args[] = $easing;
         $args[] = $startscale;
         $args[] = $endscale;
 
