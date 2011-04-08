@@ -44,9 +44,20 @@ var flash = new Effect();                    // Init the Effect
 flash.add('render(%ms)');                    // Add Action to Effect Chain
 flash.add('fadeOut(%ms, 200)');
 
-// %ms is a Placeholder for the Milliseccound in your Objekt
+// %ms is a Placeholder. It will be automaticly Replaced with the <ms>
 
 sprite.addEffect(<ms>, <effect>);            // Add the Effect. all %ms are replaced by <ms>
+
+
+
+
+
+
+
+
+
+
+
 
 
 Everything down here is _NOT_ yet implemented nor fixed. Could be changed anytime
@@ -63,19 +74,3 @@ loop(startms, times)
 }
 
 
-// ------------------------------------------------
-// Effects
-
-effect = new Sprite("file/effect.png");
-effect.setSize(0.8);                                 // Sets Size
-effect.strobe(startms, duration, size);              // Strobe will Strobe and Fadeout over duration
-effect.flash(startms, duration);                     // Flash the Strobe, and fade it out again.
-
-
-// Effects Prototype
-// this = Applied Element (Sprite)
-// params = function parameters
-
-effect['strobe'][0] = this.render(param[0]);
-effect['strobe'][1] = this.resize(param[0], param[1], param[2]);
-effect['strobe'][2] = this.fadeOut(param[0], param[1]);
