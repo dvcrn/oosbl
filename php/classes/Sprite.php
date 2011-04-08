@@ -68,8 +68,8 @@ class Sprite {
 
         $this->_osb->fade(0, 0, 1, 0); // Set visibility at the beginning to 0
         $this->_osb->fade($ms, $ms, 0, $this->trans); // Write the Fadevent
-        $this->_osb->fade($ms, $this->_songlength, $this->trans, $this->trans); // Make Sure the Object is visible during the whole Song
-
+        //$this->_osb->fade($ms, $this->_songlength, $this->trans, $this->trans); // Make Sure the Object is visible during the whole Song
+        $this->_osb->scale(30000, 30000, 1, 1);
 
         $this->_rendered = true;
     }
@@ -121,6 +121,22 @@ class Sprite {
     public function fade($ms, $duration, $trans)
     {
         $this->trans = $trans;
+    }
+
+    public function addEffect($ms, $effect)
+    {
+        $chain = array();
+        $chain = $effect->getChain();
+
+        // render(%ms)
+
+        foreach ($chain as $element)
+        {
+            $element = preg_replace("/%ms/", $ms, $element);
+            $element = '$this->' . $element . ';';
+
+            eval($element);
+        }
     }
 }
 ?>

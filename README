@@ -28,15 +28,25 @@ sprite2.hide(<ms>);                          // Set the Object Visibility to 0 a
 sprite.fadeIn(<ms>, <duration>);             // Like render(), but with a fading Effect (Trans Maximum is what's setted with setTrans)
 sprite.fadeOut(<ms>, <duration>);            // Like hide(), but with a fading Effect
 
-sprite.moveTo(<x>, <y>, <ms>, <duration>);   // Moves to Koordinate x,y in duration over time
+sprite.moveTo(<ms>, <duration>, <x>, <y>);   // Moves to Koordinate x,y in duration over time
 
 sprite.resize(<ms>, <duration>, <size>);     // Resizes the Object over the Duration
 
 sprite.fade(<ms>, <duration>, <trans>);      // Fades the Objecto tnew Trans
 
 
+// ------------------------------------------------
+// Effects
 
+// In oosbl, you can define custom Effects by using the effect-class
 
+var flash = new Effect();                    // Init the Effect
+flash.add('render(%ms)');                    // Add Action to Effect Chain
+flash.add('fadeOut(%ms, 200)');
+
+// %ms is a Placeholder for the Milliseccound in your Objekt
+
+sprite.addEffect(<ms>, <effect>);            // Add the Effect. all %ms are replaced by <ms>
 
 
 Everything down here is _NOT_ yet implemented nor fixed. Could be changed anytime
