@@ -11,10 +11,12 @@ require_once 'classes/Sprite.php';
 $oosbl = $_POST['oosbl'];
 $parser = new Parser();
 
-$test = $parser->stripComments($oosbl);
-$test = $parser->stripWhitelines($test);
-$test = $parser->stripWhitespaces($test);
-$test = $parser->convert2Php($test);
+$osb = $parser->stripComments($oosbl);
+$osb = $parser->stripWhitelines($osb);
+$osb = $parser->stripWhitespaces($osb);
 
-$test2 = 'echo $test;';
-eval($test2);
+// TODO: Don't use convert2php. Write a own parser to execute this!
+$osb = $parser->convert2Php($osb);
+
+// TODO: Same as above. eval is EVIL!
+eval($osb);

@@ -1,3 +1,71 @@
-Simple Code Generation for .osb (Osu Storyboard Files)
+Implementation of a easier Syntax for .osb (Osu Storyboard) Files.
 
-Work in progress!
+Work in Progress!
+
+
+Prototype Specification:
+
+var sprite = new Sprite("file/path.png");    // Definition
+
+sprite.setPosition(<x>,<y>);                 // Coordinates, Default is Middle (320, 240)
+sprite.setSize(<size>);                      // The Size of the Object. Default is 1
+sprite.setTrans(<trans>)                     // How Transparent should the Object be? Default is 1
+sprite.setLayer(<Layer>);                    // Set the Layer of the object to <Layer>. (Eg. Background, Foreground, ...)
+sprite.render(<ms>);                         // In Milliseccounds. Sets the Object to visible + applys all the data at the specific Time. Alternative would be fadeIn
+
+
+var sprite2 = new Sprite("file/path2.png");
+sprite2.copy(sprite);                        // Copys all the Setup Options of sprite to sprite2
+sprite2.render(<ms>);     
+
+
+sprite2.hide(<ms>);                          // Set the Object Visibility to 0 at the specific time. Alternative would be fadeout
+
+
+// ------------------------------------------------
+// Animations
+
+sprite.fadeIn(<ms>, <duration>);             // Like render(), but with a fading Effect (Trans Maximum is what's setted with setTrans)
+sprite.fadeOut(<ms>, <duration>);            // Like hide(), but with a fading Effect
+
+sprite.moveTo(<x>, <y>, <ms>, <duration>);   // Moves to Koordinate x,y in duration over time
+
+sprite.resize(<ms>, <duration>, <size>);     // Resizes the Object over the Duration
+
+sprite.fade(<ms>, <duration>, <trans>);      // Fades the Objecto tnew Trans
+
+
+
+
+
+
+Everything down here is _NOT_ yet implemented nor fixed. Could be changed anytime
+
+
+// ------------------------------------------------
+// Loops
+
+var myitem = new Sprite("file/test.png");
+myitem.copy(sprite);
+loop(startms, times)
+{
+  myitem.strobe(startms(nullified), duration, size);
+}
+
+
+// ------------------------------------------------
+// Effects
+
+effect = new Sprite("file/effect.png");
+effect.setSize(0.8);                                 // Sets Size
+effect.strobe(startms, duration, size);              // Strobe will Strobe and Fadeout over duration
+effect.flash(startms, duration);                     // Flash the Strobe, and fade it out again.
+
+
+// Effects Prototype
+// this = Applied Element (Sprite)
+// params = function parameters
+
+effect['strobe'][0] = this.render(param[0]);
+effect['strobe'][1] = this.resize(param[0], param[1], param[2]);
+effect['strobe'][2] = this.fadeOut(param[0], param[1]);
