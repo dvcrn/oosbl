@@ -4,11 +4,13 @@
  * and open the template in the editor.
  */
 
+if ( !isset($POST['oosbl']) )
+    exit();
+
 require_once 'classes/StringRunner.php';
 require_once 'classes/Parser.php';
 require_once 'classes/Sprite.php';
 require_once 'classes/Effect.php';
-require_once 'functions/Loop.php';
 
 $oosbl = $_POST['oosbl'];
 $parser = new Parser();
