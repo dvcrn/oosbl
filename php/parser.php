@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 
-if ( !isset($POST['oosbl']) )
-    exit();
-
 require_once 'classes/StringRunner.php';
 require_once 'classes/Parser.php';
 require_once 'classes/Sprite.php';
@@ -16,6 +13,7 @@ $oosbl = $_POST['oosbl'];
 $parser = new Parser();
 
 $osb = $parser->stripComments($oosbl);
+$osb = $parser->convertQuote($osb);
 $osb = $parser->stripWhitelines($osb);
 $osb = $parser->stripWhitespaces($osb);
 

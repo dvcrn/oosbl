@@ -72,6 +72,12 @@ class Parser {
         return $sr->getString();
     }
 
+    public function convertQuote($string)
+    {
+        //return preg_replace("/\\\"/", "\"", $string);
+        return str_replace('\"', '"', $string);
+    }
+
     public function convert2Php($string)
     {
         $sr = new StringRunner($string);

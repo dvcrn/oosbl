@@ -69,6 +69,7 @@ class OsbOutput {
         $args[] = $endscale;
 
         $this->put($args);
+    
     }
 
     
