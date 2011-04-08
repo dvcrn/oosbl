@@ -61,15 +61,16 @@ class Sprite {
 
     public function render($ms)
     {
-
-        $this->_osb->sprite($this->layer, 'Centre', $this->file, $this->position['x'], $this->position['y']); // Write the Spriteheader
-
-        $this->_osb->scale(0, 0, $this->size, $this->size);
-
-        $this->_osb->fade(0, 0, 1, 0); // Set visibility at the beginning to 0
+        if ( !$this->_rendered )
+        {
+            $this->_osb->sprite($this->layer, 'Centre', $this->file, $this->position['x'], $this->position['y']); // Write the Spriteheader
+            $this->_osb->scale(0, 0, $this->size, $this->size);
+            $this->_osb->fade(0, 0, 1, 0); // Set visibility at the beginning to 0
+        }
         $this->_osb->fade($ms, $ms, 0, $this->trans); // Write the Fadevent
-        //$this->_osb->fade($ms, $this->_songlength, $this->trans, $this->trans); // Make Sure the Object is visible during the whole Song
-        $this->_osb->scale(30000, 30000, 1, 1);
+
+        if ( !$this->_rendered )
+            $this->_osb->scale(30000, 30000, 1, 1);
 
         $this->_rendered = true;
     }
@@ -91,14 +92,18 @@ class Sprite {
 
     public function fadeIn($ms, $duration)
     {
-        $this->_osb->sprite($this->layer, 'Centre', $this->file, $this->position['x'], $this->position['y']); // Write the Spriteheader
-        $this->_osb->scale(0, 0, $this->size, $this->size);
+        if ( !$this->_rendered )
+        {
+            $this->_osb->sprite($this->layer, 'Centre', $this->file, $this->position['x'], $this->position['y']); // Write the Spriteheader
+            $this->_osb->scale(0, 0, $this->size, $this->size);
 
-
-        $this->_osb->fade(0, 0, 1, 0); // Set visibility at the beginning to 0
+            $this->_osb->fade(0, 0, 1, 0); // Set visibility at the beginning to 0
+        }
+        
         $this->_osb->fade($ms, $ms + $duration, 0, $this->trans);
-        //$this->_osb->fade($ms + $duration, $this->_songlength, $this->trans, $this->trans); // Make Sure the Object is visible during the whole Song
-        $this->_osb->scale(30000, 30000, 1, 1);
+
+        if ( !$this->_rendered )
+            $this->_osb->scale(30000, 30000, 1, 1);
 
         $this->_rendered = true;
     }

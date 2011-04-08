@@ -21,8 +21,8 @@ class OsbOutput {
     {
         $args = array();
         $args[] = 'Sprite';
-        $args[] = '"'.$layer.'"';
-        $args[] = '"'.$origin.'"';
+        $args[] = $layer;
+        $args[] = $origin;
         $args[] = '"'.$filepath.'"';
         $args[] = $x;
         $args[] = $y;
