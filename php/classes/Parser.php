@@ -75,6 +75,7 @@ class Parser {
     public function convertQuote($string)
     {
         //return preg_replace("/\\\"/", "\"", $string);
+        $string = str_replace("\'", "'", $string);
         return str_replace('\"', '"', $string);
     }
 

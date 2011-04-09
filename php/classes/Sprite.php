@@ -17,7 +17,7 @@ class Sprite {
     public $trans = 1;
     public $layer = "Background";
 
-    private $_songlength = 30000;
+    private $_songlength;
     private $_rendered = false;
 
     private $_osb;
@@ -33,6 +33,7 @@ class Sprite {
         $this->position = $pos;
 
         $this->_osb = new OsbOutput();
+        $this->_songlength = $_SESSION['songlength'];
     }
 
     public function setLayer($layer)
@@ -70,7 +71,7 @@ class Sprite {
         $this->_osb->fade($ms, $ms, 0, $this->trans); // Write the Fadevent
 
         if ( !$this->_rendered )
-            $this->_osb->scale(30000, 30000, 1, 1);
+            $this->_osb->scale($this->_songlength, $this->_songlength, 1, 1);
 
         $this->_rendered = true;
     }
@@ -103,7 +104,7 @@ class Sprite {
         $this->_osb->fade($ms, $ms + $duration, 0, $this->trans);
 
         if ( !$this->_rendered )
-            $this->_osb->scale(30000, 30000, 1, 1);
+            $this->_osb->scale($this->_songlength, $this->_songlength, 1, 1);
 
         $this->_rendered = true;
     }
