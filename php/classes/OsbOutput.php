@@ -14,7 +14,7 @@ class OsbOutput {
 
     public function put($array)
     {
-        echo '<p>' . implode(",", $array) . '</p>';
+        echo  implode(",", $array) . '<br />';
     }
 
     public function sprite($layer, $origin, $filepath, $x = 320, $y = 240)
