@@ -35,7 +35,7 @@ sprite.resize(<ms>, <duration>, <size>);     // Resizes the Object over the Dura
 
 sprite.fade(<ms>, <duration>, <trans>);      // Fades the Objecto tnew Trans
 
-sprite.rotate(<ms>, <duration>, <rotation>)  // Rotates the Object to the new Angle
+sprite.rotate(<ms>, <duration>, <rotation>)  // Rotates the Object in radians
 
 // ------------------------------------------------
 // Effects
