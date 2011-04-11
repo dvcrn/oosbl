@@ -103,54 +103,59 @@ class Sprite {
         if ( !$this->_rendered )
         {
             $this->_osb->sprite($this->layer, 'Centre', $this->file, $this->position['x'], $this->position['y']); // Write the Spriteheader
-            $this->_osb->scale(0, 0, $this->size, $this->size);
+            $this->_osb->scale(0, 0, $this->size, $this->size, $duration);
 
             $this->_osb->fade(0, 0, 1, 0); // Set visibility at the beginning to 0
-            $this->_osb->rotate(0, 0, $this->rotation, $this->rotation);
+            $this->_osb->rotate(0, 0, $this->rotation, $this->rotation, $duration);
         }
         
-        $this->_osb->fade($ms, $ms + $duration, 0, $this->trans);
+        $this->_osb->fade($ms, $ms + $duration, 0, $this->trans, $duration);
 
         if ( !$this->_rendered )
-            $this->_osb->scale($this->_songlength, $this->_songlength, 1, 1);
+            $this->_osb->scale($this->_songlength, $this->_songlength, 1, 1, $duration);
 
         $this->_rendered = true;
     }
 
     public function fadeOut($ms, $duration)
     {
-        $this->_osb->fade($ms, $ms + $duration, $this->trans, 0);
+        $this->_osb->fade($ms, $ms + $duration, $this->trans, 0, $duration);
     }
 
     public function moveTo($ms, $duration, $x, $y)
     {
-        $this->_osb->move($ms, $ms + $duration, $this->position['x'], $this->position['y'], $x, $y);
+        $this->_osb->move($ms, $ms + $duration, $this->position['x'], $this->position['y'], $x, $y, $duration);
         $this->position['x'] = $x;
         $this->position['y'] = $y;
     }
 
     public function resize($ms, $duration, $size)
     {
-        $this->_osb->scale($ms, $ms + $duration, $this->size, $size);
+        $this->_osb->scale($ms, $ms + $duration, $this->size, $size, $duration);
         $this->size = $size;
     }
 
     public function rotate($ms, $duration, $endangle)
     {
-        $this->_osb->rotate($ms, $ms + $duration, $this->rotation, $endangle);
+        $this->_osb->rotate($ms, $ms + $duration, $this->rotation, $endangle, $duration);
         $this->rotation = $endangle;
     }
 
     public function fade($ms, $duration, $trans)
     {
-        $this->_osb->fade($ms, $ms + $duration, $this->trans, $trans);
+        $this->_osb->fade($ms, $ms + $duration, $this->trans, $trans, $duration);
         $this->trans = $trans;
     }
 
-    public function addEffect($ms, $effect)
+    public function addEffect($ms, $effect, $loop = false)
     {
         $chain = array();
         $chain = $effect->getChain();
+
+        if ( $loop )
+        {
+            $this->_osb->initLoop($ms, $loop);
+        }
 
         // render(%ms)
 
@@ -158,9 +163,10 @@ class Sprite {
         {
             $element = preg_replace("/%ms/", $ms, $element);
             $element = '$this->' . $element . ';';
-
             eval($element);
         }
+
+        $this->_osb->endLoop();
     }
 }
 ?>

@@ -98,7 +98,7 @@ class Parser {
 
         foreach ($matches as $value) {
             // Replace all variable with $variable
-            $string = preg_replace("/(^|[^a-zA-Z0-9]+|\()($value)(\.| |\)| )/", "$1".'$'.$value."$3", $string);
+            $string = preg_replace("/(^|[^a-zA-Z0-9]+|\()($value)(\.| |\)|, )/", "$1".'$'.$value."$3", $string);
         }
         // Replace all '.' to '->', except they are in brackets
         $string = preg_replace("/(\.)(.*\()/", '->' . "$2", $string);

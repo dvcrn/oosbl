@@ -44,35 +44,11 @@ sprite.rotate(<ms>, <duration>, <rotation>)  // Rotates the Object to the new An
 
 var flash = new Effect();                    // Init the Effect
 flash.add('render(%ms)');                    // Add Action to Effect Chain
+flash.add('render(%ms + 200)');              // Add Action to Effect Chain, starting 200ms after the effect Start
 flash.add('fadeOut(%ms, 200)');
 
 // %ms is a Placeholder. It will be automaticly Replaced with the <ms>
 
-sprite.addEffect(<ms>, <effect>);            // Add the Effect. all %ms are replaced by <ms>
+sprite.addEffect(<ms>, <effect>, <loop>);    // Add the Effect. all %ms are replaced by <ms>. <loop> defines how many times the effect should be repeated
 
-
-
-
-
-
-
-
-
-
-
-
-
-Everything down here is _NOT_ yet implemented nor fixed. Could be changed anytime
-
-
-// ------------------------------------------------
-// Loops
-
-var myitem = new Sprite("file/test.png");
-myitem.copy(sprite);
-loop(startms, times)
-{
-  myitem.strobe(startms(nullified), duration, size);
-}
-
-
+// Loops always start at 0ms. If you want the Effect to start 200ms after the Effect start, use %ms + 200
