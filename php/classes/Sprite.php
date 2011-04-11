@@ -16,6 +16,7 @@ class Sprite {
     public $size = 1;
     public $trans = 1;
     public $layer = "Background";
+    public $rotation = 0;
 
     private $_songlength;
     private $_rendered = false;
@@ -50,6 +51,11 @@ class Sprite {
         $this->position = $pos;
     }
 
+    public function setRotation($angle)
+    {
+        $this->rotation = $angle;
+    }
+
     public function setSize($size)
     {
         $this->size = $size;
@@ -67,6 +73,7 @@ class Sprite {
             $this->_osb->sprite($this->layer, 'Centre', $this->file, $this->position['x'], $this->position['y']); // Write the Spriteheader
             $this->_osb->scale(0, 0, $this->size, $this->size);
             $this->_osb->fade(0, 0, 1, 0); // Set visibility at the beginning to 0
+            $this->_osb->rotate(0, 0, $this->rotation, $this->rotation);
         }
         $this->_osb->fade($ms, $ms, 0, $this->trans); // Write the Fadevent
 
@@ -99,6 +106,7 @@ class Sprite {
             $this->_osb->scale(0, 0, $this->size, $this->size);
 
             $this->_osb->fade(0, 0, 1, 0); // Set visibility at the beginning to 0
+            $this->_osb->rotate(0, 0, $this->rotation, $this->rotation);
         }
         
         $this->_osb->fade($ms, $ms + $duration, 0, $this->trans);
@@ -125,6 +133,12 @@ class Sprite {
     {
         $this->_osb->scale($ms, $ms + $duration, $this->size, $size);
         $this->size = $size;
+    }
+
+    public function rotate($ms, $duration, $endangle)
+    {
+        $this->_osb->rotate($ms, $ms + $duration, $this->rotation, $endangle);
+        $this->rotation = $endangle;
     }
 
     public function fade($ms, $duration, $trans)

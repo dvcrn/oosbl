@@ -12,6 +12,7 @@ sprite.setSize(<size>);                      // The Size of the Object. Default 
 sprite.setTrans(<trans>)                     // How Transparent should the Object be? Default is 1
 sprite.setLayer(<Layer>);                    // Set the Layer of the object to <Layer>. (Eg. Background, Foreground, ...)
 sprite.render(<ms>);                         // In Milliseccounds. Sets the Object to visible + applys all the data at the specific Time. Alternative would be fadeIn
+sprite.setRotation(<angle>);                 // In Radiants. Sets the Rotation of the Object
 
 
 var sprite2 = new Sprite("file/path2.png");
@@ -34,6 +35,7 @@ sprite.resize(<ms>, <duration>, <size>);     // Resizes the Object over the Dura
 
 sprite.fade(<ms>, <duration>, <trans>);      // Fades the Objecto tnew Trans
 
+sprite.rotate(<ms>, <duration>, <rotation>)  // Rotates the Object to the new Angle
 
 // ------------------------------------------------
 // Effects

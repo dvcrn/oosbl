@@ -72,6 +72,19 @@ class OsbOutput {
     
     }
 
+    public function rotate($startms, $endms, $startangle, $endangle, $easing = 0)
+    {
+        $args = array();
+        $args[] = '_R';
+        $args[] = $easing;
+        $args[] = $startms;
+        $args[] = $endms;
+        $args[] = $startangle;
+        $args[] = $endangle;
+
+        $this->put($args);
+    }
+
     
 }
 ?>
