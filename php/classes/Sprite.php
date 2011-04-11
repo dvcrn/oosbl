@@ -51,9 +51,9 @@ class Sprite {
         $this->position = $pos;
     }
 
-    public function setRotation($angle)
+    public function setRotation($rotation)
     {
-        $this->rotation = $angle;
+        $this->rotation = $rotation;
     }
 
     public function setSize($size)
@@ -90,6 +90,7 @@ class Sprite {
         $this->position = $sprite->position;
         $this->size = $sprite->size;
         $this->trans = $sprite->trans;
+        $this->rotation = $sprite->rotation;
 
     }
 

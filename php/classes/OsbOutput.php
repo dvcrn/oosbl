@@ -106,7 +106,7 @@ class OsbOutput {
     
     }
 
-    public function rotate($startms, $endms, $startangle, $endangle, $duration = 0, $easing = 0)
+    public function rotate($startms, $endms, $startrotation, $endrotation, $duration = 0, $easing = 0)
     {
         $args = array();
         if ( $this->_loop )
@@ -123,8 +123,8 @@ class OsbOutput {
         $args[] = $easing;
         $args[] = $startms;
         $args[] = $endms;
-        $args[] = $startangle;
-        $args[] = $endangle;
+        $args[] = $startrotation;
+        $args[] = $endrotation;
 
         $this->put($args);
     }
