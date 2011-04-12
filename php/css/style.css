@@ -1,0 +1,29 @@
+body {
+    background: url("../img/background.png") repeat scroll 0 0 #8C8CD4;
+}
+#parser {
+    margin: 0 auto;
+    width: 800px;
+    text-align: center;
+}
+#head {
+    text-align: center;
+}
+#box {
+    margin: 0 auto;
+    border: darkcyan solid 8px;
+    width: 800px;
+    text-align: center;
+}
+#oosbl {
+    background: url('../img/osuflat.png');
+    background-color: white;
+    background-position: center;
+    padding: 10px;
+}
+#oosbl_output {
+    text-align: left;
+    padding: 40px;
+    border: wheat solid 8px;
+    display: none;
+}
