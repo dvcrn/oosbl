@@ -14,10 +14,24 @@ class OsbOutput {
 
     private $_loop = false;
     private $_loopstart;
+    private $_chain = array();
 
-    public function put($array)
+    function __destruct()
     {
-        echo  implode(",", $array) . '<br />';
+        $this->_write();
+    }
+
+    private function put($array)
+    {
+        $this->_chain[] = implode(",", $array) . '<br />';
+    }
+
+    private function _write()
+    {
+        foreach ( $this->_chain as $element )
+        {
+            echo $element;
+        }
     }
 
     public function sprite($layer, $origin, $filepath, $x = 320, $y = 240)
