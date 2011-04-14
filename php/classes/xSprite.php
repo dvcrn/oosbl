@@ -41,6 +41,11 @@ class xSprite extends Sprite
         return round($start+lcg_value()*(abs($end-$start)), 2);
     }
 
+    public function getSprites()
+    {
+        return $this->_sprites;
+    }
+
     public function addEffect($ms_1, $ms_2, $effect, $loop = false)
     {
         foreach ( $this->_sprites as $sprite )
@@ -109,11 +114,20 @@ class xSprite extends Sprite
         }
     }
 
-    public function copy($sprite)
+    public function copy(Sprite $sprite)
     {
         foreach ( $this->_sprites as $sprite )
         {
             $sprite->copy($sprite);
+        }
+    }
+
+    public function xcopy(xSprite $xsprite)
+    {
+        unset($this->_sprites);
+        foreach ( $xsprite->getSprites() as $sprite )
+        {
+            $this->_sprites[] = clone $sprite;
         }
     }
 
