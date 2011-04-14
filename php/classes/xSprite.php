@@ -36,29 +36,53 @@ class xSprite extends Sprite
         return rand($start, $end);
     }
 
-    public function addEffect($ms, $effect, $loop = false)
+    private function _rangeFloat($start, $end)
     {
-
+        return round($start+lcg_value()*(abs($end-$start)), 2);
     }
 
-    public function fade($ms, $duration, $trans)
+    public function addEffect($ms_1, $ms_2, $effect, $loop = false)
     {
-
+        foreach ( $this->_sprites as $sprite )
+        {
+            $sprite->addEffect($this->_range($ms_1, $ms_2), $effect, $loop);
+        }
     }
 
-    public function rotate($ms, $duration, $endangle)
+    public function fade($ms_1, $ms_2, $duration_1, $duration_2, $trans_1, $trans_2)
     {
-
+        foreach ( $this->_sprites as $sprite )
+        {
+            $sprite->resize($this->_range($ms_1, $ms_2), $this->_range($duration_1, $duration_2),
+                            $this->_range($trans_1, $trans_2));
+        }
     }
 
-    public function resize($ms, $duration, $size)
+    public function rotate($ms_1, $ms_2, $duration_1, $duration_2, $endangle_1, $endangle_2)
     {
-
+        foreach ( $this->_sprites as $sprite )
+        {
+            $sprite->resize($this->_range($ms_1, $ms_2), $this->_range($duration_1, $duration_2),
+                            $this->_range($endangle_1, $endangle_2));
+        }
     }
 
-    public function moveTo($ms, $duration, $x, $y)
+    public function resize($ms_1, $ms_2, $duration_1, $duration_2, $size_1, $size_2)
     {
+        foreach ( $this->_sprites as $sprite )
+        {
+            $sprite->resize($this->_range($ms_1, $ms_2), $this->_range($duration_1, $duration_2),
+                            $this->_rangeFloat($x_1, $x_2));
+        }
+    }
 
+    public function moveTo($ms_1, $ms_2, $duration_1, $duration_2, $x_1, $x_2, $y_1, $y_2)
+    {
+        foreach ( $this->_sprites as $sprite )
+        {
+            $sprite->moveTo($this->_range($ms_1, $ms_2), $this->_range($duration_1, $duration_2),
+                            $this->_range($x_1, $x_2),$this->_range($y_1, $y_2));
+        }
     }
 
     public function fadeOut($startms_1, $startms_2, $duration_1, $duration2)
@@ -87,7 +111,10 @@ class xSprite extends Sprite
 
     public function copy($sprite)
     {
-        
+        foreach ( $this->_sprites as $sprite )
+        {
+            $sprite->copy($sprite);
+        }
     }
 
     public function render($startms, $endms)
@@ -100,7 +127,10 @@ class xSprite extends Sprite
 
     public function setLayer($layer)
     {
-
+        foreach ( $this->_sprites as $sprite )
+        {
+            $sprite->setLayer($layer);
+        }
     }
 
     public function setPosition($x_1, $x_2, $y_1, $y_2)
@@ -111,22 +141,28 @@ class xSprite extends Sprite
         }
     }
 
-    public function setRotation($rotation)
-    {
-
-    }
-
-    public function setSize($size1)
+    public function setRotation($rotation_1, $rotation_2)
     {
         foreach ( $this->_sprites as $sprite )
         {
-            $sprite->setSize($size1);
+            $sprite->setRotation($this->_range($rotation_1, $rotation_2));
         }
     }
 
-    public function setTrans($trans)
+    public function setSize($size_1, $size_2)
     {
-        
+        foreach ( $this->_sprites as $sprite )
+        {
+            $sprite->setSize($this->_rangeFloat($size_1, $size_2));
+        }
+    }
+
+    public function setTrans($trans_1, $trans_2)
+    {
+        foreach ( $this->_sprites as $sprite )
+        {
+            $sprite->setTrans($this->_rangeFloat($trans_1, $trans_2));
+        }
     }
 
 
