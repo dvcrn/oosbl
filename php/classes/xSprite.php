@@ -15,17 +15,20 @@ class xSprite extends Sprite
 
     public $file;
 
-    function  __construct($file, $sprites)
+    function  __construct($file = "", $sprites = NULL)
     {
         $this->file = $file;
         $this->_sprites = array();
 
-        for ( $i = 1; $i <= $sprites; $i++ )
+        if ( !is_null($sprites))
         {
-            $this->_sprites[] = new Sprite($this->file);
-        }
+            for ( $i = 1; $i <= $sprites; $i++ )
+            {
+                $this->_sprites[] = new Sprite($this->file);
+            }
 
-        $this->file = $file;
+            $this->file = $file;
+        }
     }
 
     private function _range($start, $end)
@@ -36,6 +39,11 @@ class xSprite extends Sprite
     private function _rangeFloat($start, $end)
     {
         return round($start+lcg_value()*(abs($end-$start)), 2);
+    }
+
+    public function addSprite(Sprite $sprite)
+    {
+        $this->_sprites[] = $sprite;
     }
 
     public function getSprites()
