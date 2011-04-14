@@ -1,5 +1,5 @@
 body {
-    background: url("../img/background.png") repeat scroll 0 0 #8C8CD4;
+    background: url("../img/background.png") no-repeat scroll 0 0 #8C8CD4;
 }
 #parser {
     margin: 0 auto;

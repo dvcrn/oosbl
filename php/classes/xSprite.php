@@ -14,11 +14,6 @@ class xSprite extends Sprite
     private $_sprites;
 
     public $file;
-    public $position;
-    public $size = 1;
-    public $trans = 1;
-    public $layer = "Background";
-    public $rotation = 0;
 
     function  __construct($file, $sprites)
     {
@@ -29,11 +24,13 @@ class xSprite extends Sprite
         {
             $this->_sprites[] = new Sprite($this->file);
         }
+
+        $this->file = $file;
     }
 
     private function _range($start, $end)
     {
-        return rand($start, $end);
+        return mt_rand($start, $end);
     }
 
     private function _rangeFloat($start, $end)
@@ -58,7 +55,7 @@ class xSprite extends Sprite
     {
         foreach ( $this->_sprites as $sprite )
         {
-            $sprite->resize($this->_range($ms_1, $ms_2), $this->_range($duration_1, $duration_2),
+            $sprite->fade($this->_range($ms_1, $ms_2), $this->_range($duration_1, $duration_2),
                             $this->_range($trans_1, $trans_2));
         }
     }
@@ -67,7 +64,7 @@ class xSprite extends Sprite
     {
         foreach ( $this->_sprites as $sprite )
         {
-            $sprite->resize($this->_range($ms_1, $ms_2), $this->_range($duration_1, $duration_2),
+            $sprite->rotate($this->_range($ms_1, $ms_2), $this->_range($duration_1, $duration_2),
                             $this->_range($endangle_1, $endangle_2));
         }
     }
@@ -77,7 +74,7 @@ class xSprite extends Sprite
         foreach ( $this->_sprites as $sprite )
         {
             $sprite->resize($this->_range($ms_1, $ms_2), $this->_range($duration_1, $duration_2),
-                            $this->_rangeFloat($x_1, $x_2));
+                            $this->_rangeFloat($size_1, $size_2));
         }
     }
 
@@ -125,9 +122,12 @@ class xSprite extends Sprite
     public function xcopy(xSprite $xsprite)
     {
         unset($this->_sprites);
-        foreach ( $xsprite->getSprites() as $sprite )
+        foreach ( $xsprite->getSprites() as $index => $sprite )
         {
-            $this->_sprites[] = clone $sprite;
+            $newsprite = new Sprite($this->file);
+            $newsprite->copy($sprite);
+            
+            $this->_sprites[$index] = $newsprite;
         }
     }
 
@@ -178,6 +178,4 @@ class xSprite extends Sprite
             $sprite->setTrans($this->_rangeFloat($trans_1, $trans_2));
         }
     }
-
-
 }
